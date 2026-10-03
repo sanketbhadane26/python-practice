@@ -1,49 +1,73 @@
 # Student Marks Manager
 
-A simple Python console-based Student Marks Manager built using **Python and PostgreSQL**.
+A Python console-based Student Marks Manager built using **Python and PostgreSQL**.
 
-The project allows users to add, search, update, delete, and display student records through a menu-driven interface.
+The project allows users to add, view, search, update, delete, and analyze student records through a menu-driven interface.
 
 ## Features
 
 * Add a student and their marks
-* Search for a student
+* View all students
+* Search a student by name
+* Search a student by roll number
 * Update student marks
 * Delete a student
-* Display all students
-* Automatically generate student IDs
-* Handle cases where a student is not found
+* View student statistics
+* Calculate total number of students
+* Calculate average marks
+* Find the top student
+* Automatically generate student roll numbers
+* Handle nonexistent students
+* Handle invalid marks
+* Handle invalid roll numbers
 * Handle invalid menu choices
+* Handle empty student names
 * Store student data in PostgreSQL
 * Separate the project into multiple Python modules
 
-## Concepts Used
-
-* Python Variables
-* Input / Output
-* `if-else`
-* `while` loop
-* Functions
-* `match-case`
-* Exception Handling
-* Lists and Dictionaries
-* Modular Programming
-* PostgreSQL
-* `psycopg2`
-* SQL Queries
-* Parameterized Queries
-* Basic CRUD Operations
-* Database Transactions using `commit()`
-
-## Project Structure
+## Menu
 
 ```text
+1. Add Student
+2. View Students
+3. Search by Name
+4. Search by Roll Number
+5. Update Student
+6. Delete Student
+7. Statistics
+8. Exit
+
+Concepts Used
+- Python Variables
+- Input / Output
+- if-else
+- while loop
+- Functions
+- match-case
+- Exception Handling
+- Lists
+- Modular Programming
+- PostgreSQL
+- psycopg2
+- SQL Queries
+- Parameterized Queries
+- CRUD Operations
+- Database Transactions
+- SQL Aggregate Functions
+- Input Validation
+Project Structure
 Student-Marks-Manager/
 │
 ├── main.py
 ├── student.py
 ├── database.py
 ├── utils.py
+├── screenshots/
+│   ├── program-running.png
+│   ├── database.png
+│   ├── search.png
+│   └── statistics.png
+│
 └── README.md
 
 main.py
@@ -52,67 +76,118 @@ Responsible for:
 - Displaying the menu
 - Taking user input
 - Calling the required functions
+- Handling menu operations
 - Controlling the overall program flow
 student.py
-Contains student-related operations and logic.
+Contains the Student class.
 Responsible for:
-- Adding students
-- Searching students
-- Updating student marks
-- Deleting students
-- Displaying student records
+- Storing student information
+- Storing roll number
+- Storing student name
+- Storing student marks
 database.py
 Handles the PostgreSQL database connection and database-related operations.
 Responsible for:
 - Connecting to PostgreSQL
+- Creating the student table
+- Adding students
+- Searching students
+- Searching by roll number
+- Updating marks
+- Deleting students
+- Retrieving all students
+- Calculating statistics
 - Executing SQL queries
-- Managing database operations
-- Committing transactions
 utils.py
 Contains helper functions used by the program.
 Responsible for:
-- Reusable utility operations
-- Input/helper functions
-- Keeping the main program cleaner
+- Validating student names
+- Validating marks
+- Validating roll numbers
+- Validating menu choices
+- Handling invalid input
 Database Structure
-The program creates a PostgreSQL table named STUDENT_MANAGER:
+The program creates a PostgreSQL table named STUDENT_MANAGER.
 Column	Type	Description
-ID	SERIAL PRIMARY KEY	Automatically generated student ID
+ID	SERIAL PRIMARY KEY	Automatically generated student roll number
 NAME	VARCHAR(20)	Student name
 MARKS	INT	Student marks
 
 
 How It Works
-The program connects to a PostgreSQL database and provides a menu for performing different operations:
-1 = Add Student
-2 = Search Student
-3 = Update Marks
-4 = Delete Student
-5 = Display Students
-6 = Exit
+The program connects to a PostgreSQL database and provides a menu for performing different operations.
+Add Student
+The user enters:
+Enter student name: Sanket
+Enter student's marks: 85
 
-Example
-Menu
-1 = Add Student
-2 = Search student
-3 = Update marks
-4 = Delete student
-5 = Display Students
-6 = Exit
+The student is then stored in the PostgreSQL database.
+Search by Name
+The user enters a student's name:
+Enter student name: Sanket
 
-Enter your choice: 1
+The program searches the database and displays matching students.
+Search by Roll Number
+The user enters a roll number:
+Enter roll number: 1
 
-Enter Student name: Sanket
-Enter Students marks: 85
+The program finds and displays the student associated with that roll number.
+Update Student
+The user enters the student's roll number and provides new marks.
+The program updates the marks in the database.
+Delete Student
+The user enters the student's roll number.
+The program asks for confirmation before deleting the student.
+Statistics
+The program displays:
+Total Students
+Average Marks
+Top Student
 
-Student added successfully
+Example:
+--- Statistics ---
 
-Display Example
-Display Students
+Total Students: 5
+Average Marks: 82.40
+Top Student: Sanket
+Marks: 95
 
-(1, 'Sanket', 85)
-(2, 'Rohit', 90)
+Invalid Input Handling
+The program handles invalid user input without crashing.
+Examples include:
+Invalid Marks
+Enter student's marks: abc
 
+Please enter a valid number.
+
+Marks outside the range 0–100 are also rejected.
+Invalid Roll Number
+Enter roll number: abc
+
+Please enter a valid roll number.
+
+Empty Name
+Enter student name:
+
+Name cannot be empty.
+
+Invalid Menu Choice
+Enter your choice: 15
+
+Please enter a choice between 1 and 8.
+
+Student Not Found
+Student not found.
+
+Screenshots
+Program Running
+ 
+Database
+ 
+Search Student
+ 
+Statistics
+ 
 How to Run
 1. Make sure Python is installed
 Check your Python installation:
@@ -127,24 +202,26 @@ db1
 
 Update the database configuration in database.py if required.
 4. Run the program
-Run the main Python file:
 python main.py
 
 What I Practiced
 Through this project, I practiced:
 - Breaking a larger Python program into multiple files
 - Creating reusable functions
+- Creating and using a Python class
 - Working with PostgreSQL
 - Connecting Python with a database
 - Performing CRUD operations
 - Writing SQL queries
 - Using parameterized queries
-- Handling database transactions
+- Searching database records
+- Using SQL aggregate functions
+- Handling user input
+- Validating user input
+- Handling exceptions
 - Organizing code into modules
 - Improving code readability and maintainability
 Future Improvements
-- Add marks validation (0–100)
-- Handle invalid numeric input
 - Prevent duplicate student names
 - Improve student display format
 - Add grade calculation
@@ -152,4 +229,5 @@ Future Improvements
 - Add student attendance
 - Add sorting and filtering
 - Improve database error handling
+- Add more detailed statistics
 - Add a graphical user interface in a future version

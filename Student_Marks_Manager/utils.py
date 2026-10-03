@@ -20,3 +20,31 @@ def get_name():
             return name
 
         print("Name cannot be empty.")
+
+
+def get_roll_number():
+    while True:
+        try:
+            roll_number = int(input("Enter roll number: "))
+
+            if roll_number > 0:
+                return roll_number
+
+            print("Roll number must be greater than 0.")
+
+        except ValueError:
+            print("Please enter a valid roll number.")
+
+
+def get_menu_choice():
+    while True:
+        try:
+            choice = int(input("Enter your choice: "))
+
+            if 1 <= choice <= 8:
+                return choice
+
+            print("Please enter a choice between 1 and 8.")
+
+        except ValueError:
+            print("Please enter a number.")
