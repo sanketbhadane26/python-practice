@@ -41,7 +41,7 @@ def get_menu_choice():
         try:
             choice = int(input("Enter your choice: "))
 
-            if 1 <= choice <= 8:
+            if 1 <= choice <= 9:
                 return choice
 
             print("Please enter a choice between 1 and 8.")

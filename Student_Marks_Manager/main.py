@@ -1,5 +1,5 @@
 from student import Student
-
+import csv
 from database import (
     
     create_table,
@@ -12,7 +12,22 @@ from database import (
     get_statistics
 )
 
+def export_students_to_csv():
+    students = get_all_students()
 
+    if not students:
+        print("No students available to export.")
+        return
+
+    with open("students.csv", "w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+
+        writer.writerow(["Roll No", "Name", "Marks"])
+
+        for student in students:
+            writer.writerow(student)
+
+    print("Students exported successfully to students.csv")
 from utils import (
     get_name,
     get_marks,
@@ -182,7 +197,8 @@ def menu():
         print("5. Update Student")
         print("6. Delete Student")
         print("7. Statistics")
-        print("8. Exit")
+        print("8. Export Students to CSV")
+        print("9. Exit")
 
         choice = get_menu_choice()
 
@@ -208,8 +224,10 @@ def menu():
 
             case 7:
                 statistics_menu()
-
             case 8:
+                export_students_to_csv()
+
+            case 9:
                 print("End of program.")
                 break
 

@@ -131,3 +131,14 @@ def get_statistics():
 
         return total_students, average_marks, top_student
 
+def get_all_students():
+    with connect_db() as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT ID, NAME, MARKS
+            FROM STUDENT_MANAGER
+            ORDER BY ID
+        """)
+
+        return cursor.fetchall()
