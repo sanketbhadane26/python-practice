@@ -12,7 +12,6 @@ else:
         while(user_number>100 or user_number<1):
             user_number=int(input("Please enter a number between a vlid range 1 to 100 : "))
         attempt=1
-        
         if(user_number>num):
             print("Guess is too high")
         elif(user_number<num):
